@@ -8,15 +8,15 @@ import {
   updateUserImageProfile,
 } from "../../../helpers/auth";
 
-const Position_main = () => {
-  const [positionData, setPositionData] = useState([]);
+const Sallarys_main = () => {
+  const [sallarysData, setSallarysData] = useState([]);
   useEffect(() => {
     loadProfile();
   }, []);
   const loadProfile = () => {
     const token = getCookie("token"); //mengambil token yang disimpan di dalam cookie
     axios
-      .get(`${process.env.REACT_APP_API_URL}/positions/paging/1/10`, {
+      .get(`${process.env.REACT_APP_API_URL}/sallarys/paging/1/10`, {
         headers: {
           // masih bingung gunanya headers ?
           Authorization: `Bearer ${token}`,
@@ -25,8 +25,8 @@ const Position_main = () => {
       .then((res) => {
         // setLoading(false);
 
-        setPositionData(res.data.data.results);
-        console.log(positionData);
+        setSallarysData(res.data.data.results);
+        console.log(sallarysData);
       })
       .catch((err) => {
         if (err.response.status === 401) {
@@ -40,10 +40,16 @@ const Position_main = () => {
         <p>Data Posisi beserta codenya </p>
         <button className="rounded-md bg-green-600 text-white my-2 h-[80%] w-1/4">Buat Posisi Baru</button>
         </div>
-        {positionData.map((position) => {
-         return <div className="w-full h-12 grid grid-cols-3 my-2 justify-between bg-gray-200">
-            <div className="object-center">{position.name}</div>
-            <div className="object-center">{position.code}</div>
+        {sallarysData.map((sallarys) => {
+         return <div className="w-full h-12 grid grid-cols-7 my-2 justify-between bg-gray-200">
+            <div className="object-center">{sallarys.basic_sallary}</div>
+            <div className="object-center">{sallarys.allowance}</div>
+            <div className="object-center">{sallarys.payday}</div>
+            <div className="object-center">{sallarys.notes}</div>
+            <div className="object-center">{sallarys.employee_id.name}</div>
+
+
+
             <div className="flex items-center">
                 <button className="rounded-md bg-green-600 text-    white my-2 h-[80%] w-1/3">Update</button>
                 <button className="rounded-md text-white ml-5 bg-red-600 my-2 h-[80%] w-1/3">Delete</button>
@@ -57,4 +63,4 @@ const Position_main = () => {
   );
 };
 
-export default Position_main;
+export default Sallarys_main;

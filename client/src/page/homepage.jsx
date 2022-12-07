@@ -1,8 +1,10 @@
 import React from 'react'
-
+import Navbar from '../components/BeforeUserLogin/homepage/navbar'
 const homepage = () => {
   return (
-    <div className='text-3xl font-bold'>homepage</div>
+    <>
+    <Navbar/>
+    </>
   )
 }
 
