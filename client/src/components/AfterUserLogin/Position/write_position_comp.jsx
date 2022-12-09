@@ -49,16 +49,17 @@ const Create_position = () => {
     console.log(e.target.value);
   };
   return (
-    <div>
-      <div className="p-0.5 flex rounded-2xl bg-gradient-to-br from-[#4B85E4] to-[#FEF001]  w-full">
-        <div className="bg-hitam rounded-2xl ">
-          <div className="px-12 py-12 flex rounded-2xl   flex-col items-start xl:grid xl:grid-cols-2 w-full">
+    <div className="flex items-center justify-center w-full">
+      <div className="p-0.5 flex   items-center justify-center bg-biru_tua w-1/2">
+        <div className="bg-hitam  rounded-2xl w-full ">
+          <div className="px-12 py-12 flex rounded-2xl   flex-col items-center justify-between w-full">
+          <p className="  text-xl mb-12 text-white">Buat Posisi Baru</p>
             <>
               <form
-                className="w-full justify-start flex-1 bg-hitam text-black"
+                className="w-full justify-center flex-1 bg-hitam text-white"
                 onSubmit={handleSubmit}
               >
-                <div className="max-w-xs relative ">
+                <div className="w-full relative ">
                   <p className="font-medium text-birumuda mb-2 ">Code Posisi</p>
                   <input
                     className="text-white w-full px-4 py-3 rounded-lg font-medium bg-gray-500 mb-5"

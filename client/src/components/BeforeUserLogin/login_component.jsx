@@ -5,7 +5,7 @@ import axios from "axios";
 import { authenticate, isAuth } from "../../helpers/auth";
 import { Link, Redirect, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-
+import LoginIcon from "../../assets/beforeLogin/LOGIN.svg";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,10 +13,9 @@ const Login = () => {
   useEffect(() => {
     if (isAuth() && isAuth().role === "admin") {
       navigate("/admin");
-    } else if
-     (isAuth()) {
+    } else if (isAuth()) {
       navigate("/beranda");
-    } 
+    }
   });
 
   const [formData, setFormData] = useState({
@@ -29,7 +28,6 @@ const Login = () => {
     setFormData({ ...formData, [text]: e.target.value });
   };
 
-  
   const handleSubmit = (e) => {
     console.log(process.env.REACT_APP_API_URL);
     e.preventDefault();
@@ -55,10 +53,8 @@ const Login = () => {
 
             if (isAuth() && isAuth().role === "admin") {
               navigate("/admin");
-
             } else {
               navigate("/beranda");
-             
             }
           });
         })
@@ -77,16 +73,17 @@ const Login = () => {
     }
   };
   return (
-    <header className="w-full gap-2 bg-cover relative py-8 px-2 sm:px-8 bg-gradient-to-r from-biru to-ungu min-h-screen grid grid-cols-1 justify-items-center">
- 
-   
+    <header className="w-full gap-2 bg-cover relative py-8 px-2 sm:px-8 bg-gradient-to-r from-[#0199A7] to-[#B4DCDA] min-h-screen grid grid-cols-1 justify-items-center">
       <ToastContainer />
-      <div className="bg-gradient-to-br from-[#4B85E4] to-[#FEF001] flex-1 rounded-3xl w-11/12 sm:w-2/3 max-w-xl p-0.5">
+      <div className="bg-gradient-to-br from-[#0199A7] to-[#B4DCDA] flex-1 h-fit rounded-3xl w-11/12 sm:w-2/3 max-w-xl p-0.5">
         <form
           onSubmit={handleSubmit}
-          className="bg-gradient-to-r from-[#262642] to-[#302B4A] rounded-3xl backdrop-blur-md  md:px-16  outline-[#] outline-2  p-6  "
+          className=" bg-[#000000] bg-opacity-60 py-12 rounded-3xl backdrop-blur-md  md:px-16  outline-[#] outline-2  p-6  "
         >
-          <div className="w-full  text-center">
+          <div className="flex mb-10 justify-center items-center">
+            <img src={LoginIcon} className=""></img>
+          </div>
+          <div className="w-full   text-center">
             {/* <img src={Logintitle} className="h-8 mx-auto"></img> */}
           </div>
           <div className="text-base text-white h-4 my-2 flex gap-2">
@@ -94,7 +91,7 @@ const Login = () => {
             <div className="content-center h-full grid">Email</div>
           </div>
           <input
-            className=" text-gray-500  bg-[#3B3C5A] p-3  text-base w-full under focus:outline-none placeholder:text-gray-400 "
+            className=" text-gray-500  bg-opacity-50 bg-[#3B3C5A] p-3  text-base w-full under focus:outline-none placeholder:text-gray-400 "
             placeholder="Enter your email address"
             onChange={handleChange("email")}
             value={email}
@@ -107,7 +104,7 @@ const Login = () => {
 
           <input
             type={"password"}
-            className=" text-gray-500  bg-[#3B3C5A] p-3  text-base w-full under focus:outline-none placeholder:text-gray-400 "
+            className=" text-gray-500  bg-[#3B3C5A] bg-opacity-50 p-3  text-base w-full under focus:outline-none placeholder:text-gray-400 "
             placeholder="Enter your password"
             onChange={handleChange("password1")}
             value={password1}
@@ -125,13 +122,13 @@ const Login = () => {
             <div className="text-center font-futuramd text-gray-400 text-base ">
               <p className="inline"> Don't have an account ? </p>
               <Link
-                className="inline font-bold hover:text-putih transition duration-300"
+                className="inline font-bold hover:text-putih text-white transition duration-300"
                 to="/register"
               >
                 Sign Up
               </Link>
               <Link
-                className="hover:text-putih transition duration-300"
+                className="hover:text-putih transition text-white duration-300"
                 to="/forgetpassword"
               >
                 <p>Forget password?</p>
@@ -140,8 +137,6 @@ const Login = () => {
           </div>
         </form>
       </div>
-
-      
     </header>
   );
 };

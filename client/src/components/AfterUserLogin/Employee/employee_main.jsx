@@ -35,23 +35,31 @@ const Position_main = () => {
   };
   return (
     <div className="w-screen h-screen bg-gray-300 justify-center flex items-center">
-      <div className="w-2/3 h-2/3 p-4 gap-2 bg-blue-300">
-        <div className="w-full h-12 flex  my-2 justify-between bg-gray-20"> 
-        <p>Data Posisi beserta codenya </p>
-        <button className="rounded-md bg-green-600 text-white my-2 h-[80%] w-1/4">Buat Posisi Baru</button>
+      <div className="w-2/3 h-2/3 p-4 gap-2 overflow-y-scroll bg-blue-300">
+        <div className="w-full h-12 flex  my-2 justify-between bg-gray-20">
+          <p>Data Posisi beserta codenya </p>
+          <button className="rounded-md bg-green-600 text-white my-2 h-[80%] w-1/4">
+            Buat Posisi Baru
+          </button>
         </div>
-        {positionData.map((position) => {
-         return <div className="w-full h-12 grid grid-cols-3 my-2 justify-between bg-gray-200">
-            <div className="object-center">{position.name}</div>
-            <div className="object-center">{position.email}</div>
-            <div className="flex items-center">
-                <button className="rounded-md bg-green-600 text-    white my-2 h-[80%] w-1/3">Update</button>
-                <button className="rounded-md text-white ml-5 bg-red-600 my-2 h-[80%] w-1/3">Delete</button>
-
-            </div>
-        
-         </div>;
-        })}
+        <div className="overflow-y-scroll ">
+          {positionData.map((position) => {
+            return (
+              <div className="w-full h-12 grid grid-cols-3 my-2 justify-between bg-gray-200">
+                <div className="object-center">{position.name}</div>
+                <div className="object-center">{position.email}</div>
+                <div className="flex items-center">
+                  <button className="rounded-md bg-green-600 text-    white my-2 h-[80%] w-1/3">
+                    Update
+                  </button>
+                  <button className="rounded-md text-white ml-5 bg-red-600 my-2 h-[80%] w-1/3">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
