@@ -4,6 +4,7 @@ Aplikasi frontend ini dibuat menggunakan React-Tailwind Framework
 
 ## Instalasi
 ```
+cd client
 npm install
 npm start
 Server akan berjalan di localhost:3000
