@@ -7,7 +7,7 @@ import Create_position from "./components/AfterUserLogin/Position/create_positio
 
 import Create_employee from "./components/AfterUserLogin/Employee/write_employee_comp";
 
-import Create_sallarys from "./components/AfterUserLogin/Sallarys/write_employee_comp";
+import Create_sallarys from "./components/AfterUserLogin/Sallarys/write_sallary_comp";
 
 import Sallary from "./page/sallary";
 
@@ -16,6 +16,7 @@ import Employee from "./page/employee";
 import AdminRoute from "./routes/AdminRoute";
 
 import DashboardTemplate from "./components/DashboardTemplate";
+import Dashboard from "./components/AfterUserLogin/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -31,26 +32,87 @@ function App() {
               <>
                 <DashboardTemplate
                   title="DASHBOARD LOMBA ADMIN"
+                  clickedPosition = {true}
                   content={<Position />}
                 />
               </>
             }
           />
-            <Route
+          <Route
+            path="/dashboard"
+            element={
+              <>
+                <DashboardTemplate
+                  title="DASHBOARD LOMBA ADMIN"
+                  clickedHome = {true}
+                  content={<Dashboard />}
+                />
+              </>
+            }
+          />
+          <Route
             path="/position/create"
             element={
               <>
                 <DashboardTemplate
                   title="DASHBOARD LOMBA ADMIN"
+                  clickedPosition = {true}
                   content={<Create_position />}
                 />
               </>
             }
           />
-          <Route path="/employee" element={<Employee />} />
-          <Route path="/sallary" element={<Sallary />} />
-          <Route path="/employee/create" element={<Create_employee />} />
-          <Route path="/sallary/create" element={<Create_sallarys />} />
+          <Route
+            path="/employee"
+            element={
+              <>
+                <DashboardTemplate
+                clickedEmployee= {true}
+                  title="Dashboard Employee"
+                  content={<Employee />}
+                />
+              </>
+            }
+          />
+          <Route
+            path="/sallary"
+            element={
+              <>
+                <DashboardTemplate
+                  title="Dashboard Sallary"
+                  clickedSallary= {true}
+
+                  content={<Sallary />}
+                />
+              </>
+            }
+          />
+
+          <Route
+            path="/employee/create"
+            element={
+              <>
+                <DashboardTemplate
+                  title="Dashboard Sallary"
+                  clickedEmployee= {true}
+                  content={<Create_employee />}
+                />
+              </>
+            }
+          />
+          <Route
+            path="/sallary/create"
+            element={
+              <>
+                <DashboardTemplate
+                  title="Dashboard Sallary"
+                  clickedSallary= {true}
+                  content={<Create_sallarys />}
+                />
+              </>
+            }
+          />
+
         </Route>
       </Routes>
     </>

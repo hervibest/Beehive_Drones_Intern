@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import LoadingSpinner from "../../LoadingSpiner";
+import { Link, useNavigate } from "react-router-dom";
 import {
   updateUser,
   isAuth,
@@ -11,38 +12,62 @@ import {
   updateUserImageProfile,
 } from "../../../helpers/auth";
 const Create_position = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     code: "",
     name: "",
-    textChange:"submit"
+    textChange: "Submit",
   });
-  const { name, code,textChange } = formData;
+  const { name, code, textChange } = formData;
+
   const handleSubmit = (e) => {
     const token = getCookie("token");
+    e.preventDefault();   
+    if (code !=="") {
+      
+      if (name !=="") {
+                                        
 
-    e.preventDefault();
-
-    setFormData({ ...formData, textChange: "Submitting" });
-    setLoading(true);
-    axios
-      .post(
-        `${process.env.REACT_APP_API_URL}/positions/create`,
-        {
-          code,
-          name
-          
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {});
+        setFormData({ ...formData, textChange: "Submitting" });
+        setLoading(true);
+        axios
+          .post(
+            `${process.env.REACT_APP_API_URL}/positions/create`,
+            {
+              code,
+              name,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res);
+            setFormData({
+              ...formData,
+              code: "",
+              name: "",
+              textChange: "Submitted",
+            });
+            toast.success("Selamat anda telah menambahkan Posisi Baru");
+            setTimeout(() => {
+              navigate("/position");
+            }, 1000);
+          })
+          .catch((err) => {console.log("test")});
+      }
+      else {
+        console.log("test")
+        toast.error("Name tidak boleh kosong");
+      }
+    }
+    else {
+      console.log("test1")
+      toast.error("Code tidak boleh kosong");
+    }
   };
   const handleChange = (text) => (e) => {
     setFormData({ ...formData, [text]: e.target.value });
@@ -50,10 +75,11 @@ const Create_position = () => {
   };
   return (
     <div className="flex items-center justify-center w-full">
-      <div className="p-0.5 flex   items-center justify-center bg-biru_tua w-1/2">
+      <ToastContainer />
+      <div className="p-0.5 flex   items-center justify-center rounded-xl bg-biru_tua md:w-1/2 w-[87%]">
         <div className="bg-hitam  rounded-2xl w-full ">
           <div className="px-12 py-12 flex rounded-2xl   flex-col items-center justify-between w-full">
-          <p className="  text-xl mb-12 text-white">Buat Posisi Baru</p>
+            <p className="  text-xl mb-12 text-white">Buat Posisi Baru</p>
             <>
               <form
                 className="w-full justify-center flex-1 bg-hitam text-white"
@@ -79,18 +105,23 @@ const Create_position = () => {
                     onChange={handleChange("name")}
                     value={name}
                   />
-                 
-                  
-
-                 
 
                   <button
                     type="submit"
-                    className=" mb-3 tracking-wide font-semibold bg-birumuda text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out xl:flex items-center justify-center focus:shadow-outline focus:outline-none"
+                    className=" mb-3 tracking-wide font-semibold bg-birumuda text-gray-100 w-full py-4 rounded-lg bg-biru_muda  transition-all duration-300 ease-in-out xl:flex items-center justify-center focus:shadow-outline focus:outline-none"
                   >
                     <i className="fas fa-user-plus fa 1x w-6  -ml-2" />
                     <span className="ml-3">{textChange}</span>
                   </button>
+                  <Link to="/position">
+                    <button
+                      type="button"
+                      className=" mb-3 tracking-wide font-semibold bg-birumuda text-gray-100 w-full py-4 rounded-lg bg-biru_gelap  transition-all duration-300 ease-in-out xl:flex items-center justify-center focus:shadow-outline focus:outline-none"
+                    >
+                      <i className="fas fa-user-plus fa 1x w-6  -ml-2" />
+                      <span className="ml-3">Kembali</span>
+                    </button>
+                  </Link>
                 </div>
               </form>
             </>

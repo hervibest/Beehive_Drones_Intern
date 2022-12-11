@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import LoadingSpinner from "../../LoadingSpiner";
+import { useNavigate } from "react-router-dom";
 import {
   updateUser,
   isAuth,
@@ -10,7 +12,7 @@ import {
   signout,
   updateUserImageProfile,
 } from "../../../helpers/auth";
-const Create_position = () => {
+const Create_position = ({title}) => {
   const [positionData, setPositionData] = useState([]);
   useEffect(() => {
     loadProfile();
@@ -35,7 +37,7 @@ const Create_position = () => {
         }
       });
   };
-
+   const navigate= useNavigate();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     nik : "",
@@ -73,7 +75,20 @@ const Create_position = () => {
             }
           )
           .then((res) => {
-            console.log(res);
+            setFormData({
+              ...formData,
+              nik : "",
+              name : "",
+              address : "",
+              phone : "",
+              email : "",
+              position_id : "",
+              textChange: "Submitted",
+            });
+            toast.success("Selamat anda berhasil menambahkan Employee Baru");
+            setTimeout(() => {
+              navigate("/employee");
+            }, 1000);
           })
           .catch((err) => {
 
@@ -85,16 +100,19 @@ const Create_position = () => {
     console.log(e.target.value);
   };
   return (
-    <div>
-      <div className="p-0.5 flex rounded-2xl bg-gradient-to-br from-[#4B85E4] to-[#FEF001]  w-full">
-        <div className="bg-hitam rounded-2xl ">
-          <div className="px-12 py-12 flex rounded-2xl   flex-col items-start xl:grid xl:grid-cols-2 w-full">
+    <div className="flex items-center justify-center h-full w-full">
+      <ToastContainer />
+      <div className="p-0.5 flex   items-center justify-center rounded-xl bg-biru_tua sm:w-[80%] w-[90%]">
+        <div className="bg-hitam  rounded-2xl w-full ">
+          <div className="sm:px-12 px-6 py-6 flex rounded-2xl   flex-col items-center justify-between w-full">
             <>
               <form
-                className="w-full justify-start flex-1 bg-hitam text-black"
+                className="w-full justify-center flex-1 items-center bg-hitam text-white"
                 onSubmit={handleSubmit}
               >
-                <div className="max-w-xs relative ">
+                <div className="text-center mb-4 font-bold text-2xl">Masukkan Data Pegawai</div>
+                <div className="w-full lg:grid lg:grid-cols-2 relative ">
+                  <div className="w-[90%]">
                   <p className="font-medium text-birumuda mb-2 ">NIK</p>
                   <input
                     className="text-white w-full px-4 py-3 rounded-lg font-medium bg-gray-500 mb-5"
@@ -124,6 +142,8 @@ const Create_position = () => {
                     onChange={handleChange("address")}
                     value={address}
                   />
+                  </div>
+                  <div className="w-[90%]">
                   <p className="font-medium text-birumuda mb-2 ">
                     Masukkan No Handphone
                   </p>
@@ -147,7 +167,7 @@ const Create_position = () => {
                   <p className="font-medium text-birumuda mb-2 ">
                     Masukkan Posisi
                   </p>
-
+                  
                   <select
                     name="Posisi"
                     onChange={handleChange("position_id")}
@@ -160,14 +180,21 @@ const Create_position = () => {
                       return <option value={position._id}>{position.code}-{position.name}</option>;
                     })}
                   </select>
-
+                  </div>
                   <button
                     type="submit"
-                    className=" mb-3 tracking-wide font-semibold bg-birumuda text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out xl:flex items-center justify-center focus:shadow-outline focus:outline-none"
+                    className="mx-auto bg-biru_muda text-gray-100 w-1/2 py-4 rounded-lg  transition-all duration-300 ease-in-out xl:flex items-center justify-center focus:shadow-outline focus:outline-none"
                   >
-                    <i className="fas fa-user-plus fa 1x w-6  -ml-2" />
                     <span className="ml-3">{textChange}</span>
                   </button>
+                  <Link to="/employee">
+                  <button
+                    type="button"
+                    className=" bg-biru_gelap mx-auto text-gray-100 w-1/2 py-4 rounded-lg transition-all duration-300 ease-in-out xl:flex items-center justify-center focus:shadow-outline focus:outline-none"
+                  >
+                    <span className="ml-3">Cancel</span>
+                  </button>
+                  </Link>
                 </div>
               </form>
             </>

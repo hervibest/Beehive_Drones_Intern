@@ -12,7 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (isAuth() && isAuth().role === "admin") {
-      navigate("/admin");
+      navigate("/dashboard");
     } else if (isAuth()) {
       navigate("/beranda");
     }
@@ -52,7 +52,7 @@ const Login = () => {
             });
 
             if (isAuth() && isAuth().role === "admin") {
-              navigate("/admin");
+              navigate("/dashboard");
             } else {
               navigate("/beranda");
             }
@@ -66,7 +66,7 @@ const Login = () => {
             textChange: "Sign In",
           });
           console.log(err.response);
-          toast.error(err.response.data.errors);
+          toast.error(err.response.data.message);
         });
     } else {
       toast.error("Isikan keseluruhan informasi Anda");
