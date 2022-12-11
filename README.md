@@ -3,9 +3,12 @@ Penugasan intern beehive drones berupa Website Responsive.
 Aplikasi frontend ini dibuat menggunakan React-Tailwind Framework
 
 ## Instalasi
+```
 npm install
 npm start
 Server akan berjalan di localhost:3000
+```
+
 ## Login Interface
 ### Login Desktop
 ![Login Desktop](Docs/Login_Desktop.PNG)
