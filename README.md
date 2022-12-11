@@ -17,9 +17,9 @@ Server akan berjalan di localhost:3000
 
 ## Dashboard Interface
 ### Dashboard Desktop
-![Dashboard Desktop](Docs/Login_Desktop.PNG)
+![Dashboard Desktop](Docs/Dashboard_Desktop.PNG)
 ### Dashboard Mobile
-![Dashboard Mobile](Docs/Login_Mobile.PNG)
+![Dashboard Mobile](Docs/Dashboard_Mobile.PNG)
 ### Dashboard Mobile with Dropdown
 ![Dashboard Mobile with Dropdown](Docs/Dashboard_with_Dropdown.PNG)
 
